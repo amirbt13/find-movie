@@ -1,3 +1,8 @@
+# Guide
+
+write your movie title and click SEARCH
+\*(two kind of search component exist, "Search.js" shows data in a card)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
