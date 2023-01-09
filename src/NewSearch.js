@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useSearchMovieQuery } from "./redux/api/apiSlice";
 
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMode } from "./redux/darkMode/darkModeSlice";
+
 // MUI
 import {
   Container,
@@ -9,6 +12,9 @@ import {
   Button,
   TextField,
   CircularProgress,
+  Switch,
+  FormGroup,
+  FormControlLabel,
 } from "@mui/material";
 import MovieCreationOutlinedIcon from "@mui/icons-material/MovieCreationOutlined";
 import Movie from "./Movie";
@@ -16,6 +22,9 @@ import Movie from "./Movie";
 const NewSearch = () => {
   const [inputVal, setInputVal] = useState("");
   const [title, setTitle] = useState("");
+
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.darkmode.mode);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -50,6 +59,14 @@ const NewSearch = () => {
               color="primary"
             />
           </Typography>
+        </Grid>
+        <Grid item sx={{ marginBottom: "10px", opacity: "0.7" }}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Switch onChange={() => dispatch(toggleMode())} />}
+              label={`${mode} mode`}
+            />
+          </FormGroup>
         </Grid>
         <Grid
           item
