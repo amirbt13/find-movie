@@ -7,10 +7,11 @@ import {
   Grid,
   Typography,
   Button,
-  Chip,
   TextField,
   CircularProgress,
 } from "@mui/material";
+import MovieCreationOutlinedIcon from "@mui/icons-material/MovieCreationOutlined";
+import Movie from "./Movie";
 
 const NewSearch = () => {
   const [inputVal, setInputVal] = useState("");
@@ -20,9 +21,9 @@ const NewSearch = () => {
     e.preventDefault();
     setTitle(inputVal);
   };
-  const { data: movie, isFetching, isLoading } = useSearchMovieQuery(title);
+  const { data: movie, isFetching } = useSearchMovieQuery(title);
 
-  console.log(movie);
+  //console.log(movie);
 
   //   if (isFetching) return <CircularProgress />;
 
@@ -38,6 +39,16 @@ const NewSearch = () => {
         <Grid item>
           <Typography align="center" gutterBottom={true} variant="h2">
             Find Your Favorite Movie
+            <MovieCreationOutlinedIcon
+              sx={{
+                fontSize: "4rem",
+                top: "12px",
+                left: "2px",
+                position: "relative",
+              }}
+              fontSize="large"
+              color="primary"
+            />
           </Typography>
         </Grid>
         <Grid
@@ -75,34 +86,7 @@ const NewSearch = () => {
         ) : isFetching ? (
           <CircularProgress />
         ) : (
-          <Grid item container direction="row" justifyContent="space-around">
-            <Grid item xs={5}>
-              <Grid item sx={{ marginBottom: "15px" }}>
-                <Chip
-                  label={`Year: ${movie.Year}`}
-                  color="primary"
-                  variant="outlined"
-                  sx={{ marginRight: "2px" }}
-                />
-                <Chip
-                  label={`IMDb Rating: ${movie.imdbRating}`}
-                  color="success"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item>
-                <Typography variant="h5">Title: {movie.Title}</Typography>
-                <Typography variant="subtitle2">{movie.Actors}</Typography>
-                <Typography variant="h5" sx={{ marginTop: "5px" }}>
-                  Plot:
-                </Typography>
-                <Typography variant="p">{movie.Plot}</Typography>
-              </Grid>
-            </Grid>
-            <Grid item xs={3}>
-              <img src={movie.Poster} alt="movie" />
-            </Grid>
-          </Grid>
+          <Movie movie={movie} />
         )}
       </Grid>
     </Container>

@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import Search from "./Search";
+// import Search from "./Search";
 import NewSearch from "./NewSearch";
 
 function App() {
